@@ -1,1 +1,1 @@
-# practicape
+[![Coverage Status](https://coveralls.io/repos/github/PaolaAstudillo/practicape/badge.svg?branch=main)](https://coveralls.io/github/PaolaAstudillo/practicape?branch=main)
