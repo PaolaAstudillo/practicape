@@ -156,7 +156,21 @@
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,6 +183,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,6 +205,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,14 +242,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,24 +264,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Clase Logger implementada como un Singleton.
- * Se utiliza para registrar acciones en un sistema con información de usuario, acción y fecha-hora.
- */
+ * asegurar que solo exista una instancia de esta 
+ * clase en toda la aplicación.
+  */
 export class Logger {
     private static instance: Logger;
     private logs: Array&lt;[string, string, Date]&gt;;
 &nbsp;
     /**
-     * Constructor privado para prevenir la instanciación directa.
+     * Constructor privado para prevenir la instanciación directa con new desde fuera.
      */
     private constructor() {
         this.logs = [];
@@ -266,6 +293,8 @@ export class Logger {
 &nbsp;
     /**
      * Método estático para obtener la instancia del Singleton.
+     * proporciona un punto de acceso global 
+     * a la instancia de Logger.
      * @returns La instancia de Logger.
      */
     public static getInstance(): Logger {
@@ -282,6 +311,7 @@ export class Logger {
      */
     public logAction(user: string, action: string): void {
         const date = new Date();
+        //añade a la lista de logs
         this.logs.push([user, action, date]);
     }
 &nbsp;
@@ -292,7 +322,7 @@ export class Logger {
      */
     public getActionsByUser(user: string): Array&lt;[string, string, Date]&gt; {
         return this.logs.filter(log =&gt; log[0] === user);
-    }
+    } //this.log contiene todos los registros de acciones de una clase
 &nbsp;
     /**
      * Obtiene las acciones de un tipo específico.
@@ -317,16 +347,23 @@ export class Logger {
      * Hace la clase iterable sobre los logs.
      * @returns Un iterador para los logs.
      */
+    // se pueden recorrer todos los registros de 
+    //acción usando un bucle for...of
     [Symbol.iterator](): Iterator&lt;[string, string, Date]&gt; {
+        //retornar un objeto que cumpla con la interfaz Iterator. 
         let index = 0;
+        //index para llevar un registro de la posición actual en el arreglo logs.
         return {
+            //Se retorna un objeto con un método next.
             next: (): IteratorResult&lt;[string, string, Date]&gt; =&gt; {
-                if (index &lt; this.logs.length) {
+                if (index &lt; this.logs.length) {//aun hay elementos por iterar
                     return { value: this.logs[index++], done: false };
-                } else {
+                } else {// index es igual o mayor que = se han iterado todos los elementos.
+&nbsp;
                     // Cuando el iterador ha terminado, se devuelve 'done: true'
                     // y se proporciona un valor 'undefined' para 'value'
-                    return { value: undefined, done: true };
+                    return { value: undefined, done: true }; 
+                    //undefined porque es opcional en la ultima llamada,cuando done true
                 }
             }
         };
@@ -334,12 +371,14 @@ export class Logger {
 }
 &nbsp;
 // Ejemplo de uso de la clase Logger
-const logger = Logger.getInstance();
+const logger = Logger.getInstance();//obtener instancia logger
 logger.logAction('user1', 'login');
 logger.logAction('user2', 'logout');
 &nbsp;
 // Iterar sobre todos los logs
-for (const log of logger) {
+for (const log of logger) { //ietramos sobre la instancia logger
+   //obtiene el valor de la siguiente tupla de registro
+   // de log en la lista logs de Logger.
     console.log(log);
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -349,7 +388,7 @@ for (const log of logger) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-04T11:03:14.962Z
+                at 2024-03-04T11:31:52.712Z
             </div>
         <script src="prettify.js"></script>
         <script>
